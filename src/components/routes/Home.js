@@ -8,9 +8,6 @@ const Homepage = () => {
         const getCollectionRef = collection(db, "questions")
         const data = await getDocs(getCollectionRef)
         setPostList(data.docs)
-        console.log()
-        console.log(data.docs[0].id)
-
     }
     useEffect(
         () => {

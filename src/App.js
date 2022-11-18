@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import { AuthProvider } from './components/context/AuthContext';
 import ForgetPassword from './components/ForgetPassword';
+import AnswerQuestion from './components/routes/AnswerQuestion';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route component={Login} path="/Login" exact />
           <Route component={Signup} path="/Signup" exact />
           <Route component={ForgetPassword} path="/ForgetPassword" exact />
+          <Route component={AnswerQuestion} to="/AnswerQuestion?"></Route>
         </Switch>
       </AuthProvider>
     </>

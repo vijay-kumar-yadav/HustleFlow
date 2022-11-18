@@ -111,6 +111,7 @@ const AskQuestionForm = () => {
                         <label htmlFor="description" className="form-label h5">What are the details of your problem?</label>
                         <p className="form-text">Introduce the problem and expand on what you put in the title.</p>
                         <div className="form-control describe" name="description" >
+                            {/* rich text editor */}
                             <EditorToolbar toolbarId={'t1'} />
                             <ReactQuill
                                 theme="snow"
