@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../context/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import userIMG from "../../images/user.png"
 
 export default function Profile() {
     const emailRef = useRef()
@@ -47,6 +48,16 @@ export default function Profile() {
 
     return (
         <>
+            <Card className="container mt-5">
+                <Card.Header className="d-flex justify-content-center">
+                    <div style={{ width: "fit-content" }} className="bg-black rounded-circle  overflow-hidden">
+                        <img src={currentUser.photoURL} style={{ width: "80px", height: "80px" }} />
+                    </div>
+                </Card.Header>
+                <Card.Body>
+
+                </Card.Body>
+            </Card>
             <Card style={{ marginTop: "80px" }} className="container">
                 <Card.Body>
                     <h2 className="text-center mb-4">Update Profile</h2>

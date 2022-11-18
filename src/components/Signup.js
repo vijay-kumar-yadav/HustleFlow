@@ -34,9 +34,9 @@ export default function Signup() {
 
     return (
         <>
-            <div className="container">
+            <div className="container" style={{ marginTop: "80px" }}>
 
-                <Card>
+                <Card className="bg-secondary bg-opacity-10">
                     <Card.Body>
                         <h2 className="text-center mb-4">Sign Up</h2>
                         {error && <Alert variant="danger">{error}</Alert>}

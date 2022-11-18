@@ -18,7 +18,12 @@ export default function ForgotPassword() {
             setError("")
             setLoading(true)
             await resetPassword(emailRef.current.value)
+            emailRef.current.value = "";
+
             setMessage("Check your inbox for further instructions")
+            setTimeout(() => {
+                setMessage("");
+            }, 2000);
         } catch {
             setError("Failed to reset password")
         }
@@ -28,11 +33,11 @@ export default function ForgotPassword() {
 
     return (
         <>
-            <div className="container">
+            <div className="container " >
 
-                <Card style={{ marginTop: "80px" }}>
+                <Card style={{ marginTop: "80px" }} className="bg-secondary bg-opacity-10">
                     <Card.Body>
-                        <h2 className="text-center mb-4">Password Reset</h2>
+                        <h2 className="text-center mb-4 ">Password Reset</h2>
                         {error && <Alert variant="danger">{error}</Alert>}
                         {message && <Alert variant="success">{message}</Alert>}
                         <Form onSubmit={handleSubmit}>
@@ -44,7 +49,7 @@ export default function ForgotPassword() {
                                 Reset Password
                             </Button>
                         </Form>
-                        <div className="w-100 text-center">
+                        <div className="w-100 text-center  mt-3">
                             <Link to="/login" className="text-decoration-none">Login</Link>
                         </div>
                     </Card.Body>

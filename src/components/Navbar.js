@@ -9,7 +9,7 @@ import { useAuth } from "./context/AuthContext";
 const Navbar = () => {
     // const [userName, setUsername] = useState()
     const [error, setError] = useState("")
-    const { currentUser, logout } = useAuth()
+    const { currentUser, logout, signInWithGoogle } = useAuth()
     const history = useHistory();
     async function handleLogout() {
         setError('');
@@ -46,17 +46,24 @@ const Navbar = () => {
                         {/* {currentUser ? currentUser.displayName : ""} */}
                         {currentUser ?
                             <>
+                                <div className="d-flex">
 
-
-                                <NavDropdown className="text-white" title={
-                                    "🤖" + currentUser.displayName
-                                }>
-                                    <Link className="dropdown-item" to="/Profile" >Profile</Link>
-                                    <NavDropdown.Item onClick={handleLogout} >Log out</NavDropdown.Item>
-                                </NavDropdown>
+                                    <div style={{ width: "fit-content", marginRight: "10px" }} className="bg-black rounded-circle  overflow-hidden">
+                                        <img src={currentUser.photoURL} style={{ width: "30px", height: "30px" }} />
+                                    </div>
+                                    <NavDropdown className="text-white" title={
+                                        currentUser.displayName
+                                    }>
+                                        <Link className="dropdown-item" to="/Profile" >Profile</Link>
+                                        <NavDropdown.Item onClick={handleLogout} >Log out</NavDropdown.Item>
+                                    </NavDropdown>
+                                </div>
                             </>
+                            : <button className="btn btn-primary button-google" onClick={signInWithGoogle}>Login With Google</button>
 
-                            : <Link className="btn btn-primary button-google" to="/login">Login</Link>}
+
+                        }
+                        {/* <Link className="btn btn-primary button-google" to="/login">Login</Link> */}
                     </div>
                 </div>
             </nav>

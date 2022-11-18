@@ -28,10 +28,10 @@ export default function Login() {
 
     return (
         <>
-            <div className="container" >
+            <div className="container" style={{ marginTop: "80px" }} >
                 <div >
 
-                    <Card>
+                    <Card className="bg-secondary bg-opacity-10">
                         <Card.Body>
                             <h2 className="text-center mb-4">Log In</h2>
                             {error && <Alert variant="danger">{error}</Alert>}
@@ -44,7 +44,7 @@ export default function Login() {
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control type="password" ref={passwordRef} required />
                                 </Form.Group>
-                                <Button disabled={loading} className="w-100 mt-3" type="submit">
+                                <Button disabled={loading} className="w-100 mt-3 bg-opacity-10" type="submit">
                                     {loading ? <div class="spinner-border text-success" role="status">
                                         <span class="sr-only"></span>
                                     </div> : "Log In"}
