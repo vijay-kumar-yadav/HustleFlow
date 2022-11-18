@@ -1,11 +1,12 @@
 import React from 'react';
 import AskQuestion from './components/routes/AskQuestion';
 import Home from './components/routes/Home';
-import Navbar from './components/routes/Navbar';
+import Navbar from "./components/Navbar"
 import { Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import { AuthProvider } from './components/context/AuthContext';
+import ForgetPassword from './components/ForgetPassword';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route component={AskQuestion} path="/AskQuestion" />
           <Route component={Login} path="/Login" exact />
           <Route component={Signup} path="/Signup" exact />
+          <Route component={ForgetPassword} path="/ForgetPassword" exact />
         </Switch>
       </AuthProvider>
     </>
