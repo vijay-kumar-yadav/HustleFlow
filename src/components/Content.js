@@ -48,7 +48,7 @@ const Content = (props) => {
                             }
                         </div>
                         <p className="askedby">
-                            <span >  {`${question.username ? "Asked By - " + question.username : ""}`}</span>
+                            Asked By -   <span className=" text-capitalize"> {question.username} </span>
                         </p>
                     </div>
 

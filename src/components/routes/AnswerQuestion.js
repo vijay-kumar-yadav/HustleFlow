@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import 'react-quill/dist/quill.bubble.css'
 import { db } from "../../firebase";
 import { collection, getDocs, addDoc } from "firebase/firestore";
-// import Comments from "./Comments";
+import Comments from "../Comments";
 // import { useHistory } from "react-router-dom";
 // import $ from "jquery"
 // import Likes from "./Likes";
@@ -40,18 +40,18 @@ const AnswerQuestion = () => {
                 setLoading(false)
                 return (setData(docs[0].data()))
             })
-            // getAns().then((data) => {
-            //     let requireAns = data.filter((data) => data.data().questionid === questionId)
-            //     setAnsList(requireAns)
-            //     setComment(
-            //         requireAns.map((data, index) => {
-            //             const ans = data.data()
-            //             return (
-            //                 <Comments id={data.id} index={index} ans={ans} />
-            //             )
-            //         })
-            //     )
-            // })
+            getAns().then((data) => {
+                let requireAns = data.filter((data) => data.data().questionid === questionId)
+                setAnsList(requireAns)
+                setComment(
+                    requireAns.map((data, index) => {
+                        const ans = data.data()
+                        return (
+                            <Comments id={data.id} index={index} ans={ans} />
+                        )
+                    })
+                )
+            })
         }, [questionId]
     )
     // console.log(docs[0].data())
@@ -96,22 +96,22 @@ const AnswerQuestion = () => {
             return
         }
         try {
-            // createPost().then(() => {
-            //     setComment(
-            //         ansList.map((data, index) => {
-            //             const ans = data.data()
-            //             return (
-            //                 <Comments id={index} ans={ans} />
-            //             )
-            //         })
-            //     )
-            //     setSuccess("Answer Posted")
-            //     setTimeout(() => {
-            //         setSuccess("");
-            //     }, 2000)
-            //     document.location.reload()
+            createPost().then(() => {
+                setComment(
+                    ansList.map((data, index) => {
+                        const ans = data.data()
+                        return (
+                            <Comments id={index} ans={ans} />
+                        )
+                    })
+                )
+                setSuccess("Answer Posted")
+                setTimeout(() => {
+                    setSuccess("");
+                }, 2000)
+                document.location.reload()
 
-            // });
+            });
             // history.push('/')
             setuserInfo("")
         }
@@ -153,7 +153,7 @@ const AnswerQuestion = () => {
                         />
                         <hr />
                         <h4 className="text-center text-bg-success">Answers</h4>
-                        {/* {
+                        {
                             ansList.length !== 0 ?
                                 <>
                                     {
@@ -161,7 +161,7 @@ const AnswerQuestion = () => {
                                     }
                                 </>
                                 : ""
-                        } */}
+                        }
                         {/* <>
                                                         <p>Likes - <span id="like">0</span></p>
                                                         <button className="btn " onClick={() => { document.getElementById("like").innerHTML = 1 }}><Likes /></button>
