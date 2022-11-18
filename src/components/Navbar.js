@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import questionIMG from "../images/question.png"
+// import questionIMG from "../images/question.png"
 // import "./Navbar.css";
-// import userIMG from "../../Images/user.png"
+// import userIMG from "../Images/user.png"
 import { Link, useHistory } from "react-router-dom";
 import { Alert, NavDropdown } from "react-bootstrap";
 import { useAuth } from "./context/AuthContext";
@@ -25,7 +25,7 @@ const Navbar = () => {
             <nav className="navbar navbar-expand-lg bg-dark navbar-dark ">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">
-                        {/* <img src={questionIMG} width="30" height="30" alt="logo" />  */}
+                        {/* <img src={questionIMG} width="30" height="30" alt="logo" style={{ marginRight: "10px" }} /> */}
                         HustleFlow</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
