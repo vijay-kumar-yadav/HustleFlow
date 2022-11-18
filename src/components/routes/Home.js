@@ -1,32 +1,47 @@
-import { collection, getDocs } from 'firebase/firestore';
-import React, { useState } from 'react';
-import Content from '../Content';
-import { db } from '../../firebase';
+import React, { useEffect, useState } from "react";
+import Content from "../Content";
+import { db } from "../../firebase";
+import { collection, getDocs } from 'firebase/firestore'
+const Homepage = () => {
+    const [postList, setPostList] = useState([]);
+    const getQues = async () => {
+        const getCollectionRef = collection(db, "questions")
+        const data = await getDocs(getCollectionRef)
+        setPostList(data.docs)
+        console.log()
+        console.log(data.docs[0].id)
 
-const Home = () => {
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
-    try {
-        const questionRef = collection(db, 'questions')
-        getDocs(questionRef).then((response) => {
-            setLoading(false)
-            console.log()
-        })
     }
-    catch {
-        setError("Data not found!")
-    }
+    useEffect(
+        () => {
+            getQues()
+        }, []
+    )
+
     return (
         <>
-            {loading ? <div class="spinner-grow" role="status">
-                <span class="visually-hidden"></span>
-            </div>
-                : ""
 
-            }
-            {/* <Content question={ } id={ } /> */}
+            <div className="container" >
+                <h1 className="mb-3 text-center">Questions</h1>
+                <div className="container">
+
+                    {postList.length !== 0 ?
+                        postList.map((doc, j) => {
+                            const question = doc.data();
+                            return (<Content key={j} question={question} id={doc.id} />)
+                        }) :
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+
         </>
     )
 }
 
-export default Home
+export default Homepage;
