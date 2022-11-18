@@ -8,6 +8,9 @@ import Signup from './components/Signup';
 import { AuthProvider } from './components/context/AuthContext';
 import ForgetPassword from './components/ForgetPassword';
 import AnswerQuestion from './components/routes/AnswerQuestion';
+import Profile from './components/routes/Profile';
+import Error from './components/routes/Error';
+
 
 const App = () => {
   return (
@@ -19,8 +22,10 @@ const App = () => {
           <Route component={AskQuestion} path="/AskQuestion" />
           <Route component={Login} path="/Login" exact />
           <Route component={Signup} path="/Signup" exact />
+          <Route component={Profile} path="/Profile" exact />
           <Route component={ForgetPassword} path="/ForgetPassword" exact />
-          <Route component={AnswerQuestion} to="/AnswerQuestion?"></Route>
+          <Route component={AnswerQuestion} to="/AnswerQuestion" />
+          <Route component={Error} />
         </Switch>
       </AuthProvider>
     </>

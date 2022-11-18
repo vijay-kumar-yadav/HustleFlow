@@ -7,7 +7,7 @@ import { Alert, NavDropdown } from "react-bootstrap";
 import { useAuth } from "./context/AuthContext";
 
 const Navbar = () => {
-    const [userName, setUsername] = useState()
+    // const [userName, setUsername] = useState()
     const [error, setError] = useState("")
     const { currentUser, logout } = useAuth()
     const history = useHistory();
@@ -51,7 +51,7 @@ const Navbar = () => {
                                 <NavDropdown className="text-white" title={
                                     "🤖" + currentUser.displayName
                                 }>
-                                    <Link className="dropdown-item" to="/updateProfile" >Profile</Link>
+                                    <Link className="dropdown-item" to="/Profile" >Profile</Link>
                                     <NavDropdown.Item onClick={handleLogout} >Log out</NavDropdown.Item>
                                 </NavDropdown>
                             </>

@@ -37,7 +37,7 @@ const Content = (props) => {
                     </ul>
                 </div>
                 <div className="card-body">
-                    <Link className="card-title h5 text-decoration-none " role='button' to={"/AnswerQuestion?" + props.id}>{question.title}</Link>
+                    <Link className="card-title h5 text-decoration-none " role='button' to={"/AnswerQuestion/?" + props.id}>{question.title}</Link>
                     <p className="card-text fs-6 content">{getQuestionDesc()}</p>
                     <div className="d-flex justify-content-between ">
                         <div className="d-flex">

@@ -16,6 +16,7 @@ const AnswerQuestion = () => {
     const [loading, setLoading] = useState(true);
     const [comment, setComment] = useState({})
     const { currentUser } = useAuth()
+    // console.log(currentUser.uid)
     const [error, setError] = useState("")
     const [success, setSuccess] = useState("")
     const questionId = window.location.href.split("?")[1];
@@ -72,7 +73,9 @@ const AnswerQuestion = () => {
             content: userInfo.description,
             answerAt: date,
             likes: [],
-            username: currentUser.displayName
+            answerBy: currentUser.displayName,
+            answerByID: currentUser.uid
+
 
         })
     }
