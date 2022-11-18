@@ -35,9 +35,10 @@ function Top() {
                                     <NavLink className="dropdown-item" to="/updateProfile" >Profile</NavLink>
                                     <NavDropdown.Item onClick={handleLogout} >Log out</NavDropdown.Item>
                                 </NavDropdown>
-                            </>
+                            </>*/
 
-                            : <NavLink className="btn btn-primary button-google" to="/login">Login</NavLink>} */}
+                            <NavLink className="btn btn-primary button-google" to="/login">Login</NavLink>
+                         /*} */}
                     </div>
                 </div>
             </nav>
