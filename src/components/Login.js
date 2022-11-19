@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "./context/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
     const emailRef = useRef()
@@ -50,14 +50,14 @@ export default function Login() {
                                     </div> : "Log In"}
                                 </Button>
                             </Form>
-                            <div className="w-100 text-center mt-3">
+                            {/* <div className="w-100 text-center mt-3">
                                 <Link to="/ForgetPassword" className=" text-decoration-none text-danger">Forgot Password</Link>
-                            </div>
+                            </div> */}
                         </Card.Body>
                     </Card>
-                    <div className="w-100 text-center mt-2">
+                    {/* <div className="w-100 text-center mt-2">
                         Need an account? <Link to="/signup" className=" text-decoration-none">Sign Up</Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

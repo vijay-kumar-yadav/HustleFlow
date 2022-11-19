@@ -23,6 +23,7 @@ export default function Signup() {
         try {
             setError("")
             setLoading(true)
+            console.log(emailRef.current.value, nameRef.current.value, passwordRef.current.value)
             await signup(emailRef.current.value, nameRef.current.value, passwordRef.current.value)
             history.push("/")
         } catch {

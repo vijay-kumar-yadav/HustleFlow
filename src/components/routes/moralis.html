@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vanilla boilerplate</title>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.1/web3.min.js"
+      integrity="sha512-vtUOC0YIaNm/UutU7yfnwqnF9LOYnXtpHe2kwi1nvJNloeGQuncNBiEKP/3Ww3D62USAhbXGsnYpAYoiDsa+wA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://unpkg.com/moralis-v1@1.11.0/dist/moralis.js"></script>
+  </head>
+  <body onload="nftprocess()">
+    <button id="transfer_nft" onclick="transfernft()">Run code</button>
+
+    <script>
+      Moralis.enableWeb3();
+      async function transfernft() {
+        const options = {
+          type: "erc721",
+          receiver: "0x3014BdE9a0b9E6e0dfBE52c9f3eCa4Ca9E5bc17C",
+          contract_address: "0x757108b12b540056af2ea0810d76fea2f45fdcb5",
+          token_id: 2,
+        };
+        let result = await Moralis.transfer(options);
+      }
+    </script>
+  </body>
+</html>

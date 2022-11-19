@@ -8,19 +8,22 @@ export function useAuth() {
     return useContext(AuthContext)
 }
 const googleLoginProvider = new GoogleAuthProvider()
-
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
 
-    async function signup(email, name, password) {
-        const response = await auth.createUserWithEmailAndPassword(email, password)
-        return response.user.updateProfile({ displayName: name })
 
-    }
+    // async function signup(email, name, password) {
+    //     const response = await auth.createUserWithEmailAndPassword(email, password)
+    //     return response.user.updateProfile({ displayName: name })
+
+    // }
+
     const signInWithGoogle = () => {
         signInWithPopup(auth, googleLoginProvider).then((response) => {
             console.log(response)
+            // createUser(response)
+
         }).catch((err) => {
             console.log(err)
         })
@@ -34,17 +37,17 @@ export function AuthProvider({ children }) {
         return auth.signOut()
     }
 
-    function resetPassword(email) {
-        return auth.sendPasswordResetEmail(email)
-    }
+    // function resetPassword(email) {
+    //     return auth.sendPasswordResetEmail(email)
+    // }
 
-    function updateEmail(email) {
-        return currentUser.updateEmail(email)
-    }
+    // function updateEmail(email) {
+    //     return currentUser.updateEmail(email)
+    // }
 
-    function updatePassword(password) {
-        return currentUser.updatePassword(password)
-    }
+    // function updatePassword(password) {
+    //     return currentUser.updatePassword(password)
+    // }
     function updateName(name) {
         return currentUser.updateProfile({ displayName: name })
     }
@@ -58,14 +61,15 @@ export function AuthProvider({ children }) {
         return unsubscribe
     }, [])
 
+
     const value = {
         currentUser,
         login,
-        signup,
+        // signup,
         logout,
-        resetPassword,
-        updateEmail,
-        updatePassword,
+        // resetPassword,
+        // updateEmail,
+        // updatePassword,
         updateName,
         signInWithGoogle
     }

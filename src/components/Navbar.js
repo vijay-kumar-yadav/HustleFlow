@@ -59,7 +59,13 @@ const Navbar = () => {
                                     </NavDropdown>
                                 </div>
                             </>
-                            : <button className="btn btn-primary button-google" onClick={signInWithGoogle}>Login With Google</button>
+                            :
+                            <>
+
+                                <button className="btn btn-danger button-google" style={{ marginRight: "5px" }}  ><Link to="/Login" className=" text-decoration-none text-light">Admin Login</Link></button>
+                                <button className="btn btn-primary button-google" onClick={signInWithGoogle}>Login With Google</button>
+
+                            </>
 
 
                         }
