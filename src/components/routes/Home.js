@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Content from "../Content";
 import { db } from "../../firebase";
-import { addDoc, collection, getDocs, doc, updateDoc, setDoc, increment } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore'
 import { useAuth } from "../context/AuthContext";
 const Homepage = () => {
     const { currentUser } = useAuth();
 
     //settiing user details when logged in
-    const [question, setQuestion] = useState(0)
-    const [answer, setAnswer] = useState(0)
+    // const [question, setQuestion] = useState(0)
+    // const [answer, setAnswer] = useState(0)
     const [postList, setPostList] = useState([]);
     const getQues = async () => {
         console.log("I am ques called")
@@ -19,7 +19,7 @@ const Homepage = () => {
         if (currentUser) {
             const response = data.docs
             const requireQues = response.filter((res) => res.data().userId === currentUser.uid)
-            setQuestion(requireQues.length)
+            // setQuestion(requireQues.length)
             getAns(requireQues.length)
         }
     }
@@ -31,7 +31,7 @@ const Homepage = () => {
         const response = data.docs
         const requireAns = response.filter((res) => res.data().answerByID === currentUser.uid)
         console.log(requireAns)
-        setAnswer(requireAns.length)
+        // setAnswer(requireAns.length)
         const ans = requireAns.length
         updateUser(ques, ans);
 
@@ -53,7 +53,6 @@ const Homepage = () => {
     useEffect(
         () => {
             getQues()
-
         }, []
     )
 

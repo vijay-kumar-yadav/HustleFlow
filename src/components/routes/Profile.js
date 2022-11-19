@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../context/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-import { getDocs, collection, updateDoc, doc, increment } from "firebase/firestore"
+import { getDocs, collection, updateDoc, doc } from "firebase/firestore"
 import adminIMG from "../../images/admin.png"
 import { db } from "../../firebase"
-import { TransferNFT } from "../TransferNft"
+// import { TransferNFT } from "../TransferNft"
+// import Table from "react-bootstrap"
 
 export default function Profile() {
     // const [questionList, setQuestionList] = useState([]);
@@ -16,7 +17,8 @@ export default function Profile() {
     const [totalUser, setTotalUser] = useState(0)
     const emailRef = useRef()
     const nameRef = useRef()
-
+    const walletRef = useRef()
+    const [userDetails, setUserDetails] = useState([])
 
     // const passwordRef = useRef()
     // const passwordConfirmRef = useRef()
@@ -35,6 +37,14 @@ export default function Profile() {
         // setQuestionList(data.docs)
         return data.docs
     }
+    const walletUpdate = async (wallet) => {
+        const getCollectionRef = doc(db, "users", currentUser.uid)
+        await updateDoc(getCollectionRef,
+            {
+                walletAddress: wallet
+            })
+        // setQuestionList(data.docs)
+    }
     const getUsers = async () => {
         const getCollectionRef = collection(db, "users")
         const data = await getDocs(getCollectionRef)
@@ -48,12 +58,18 @@ export default function Profile() {
         // setQuestionList(data.docs)
         return data.docs
     }
-    const updatePerformance = async (total) => {
-        const docRef = doc(db, "users", currentUser.uid)
-        await updateDoc(docRef, {
-            performance: increment(total)
-        });
+    const fetchUser = async () => {
+        const getCollectionRef = collection(db, "users")
+        const data = await getDocs(getCollectionRef)
+        // setQuestionList(data.docs)
+        return data.docs
     }
+    // const updatePerformance = async (total) => {
+    //     const docRef = doc(db, "users", currentUser.uid)
+    //     await updateDoc(docRef, {
+    //         performance: increment(total)
+    //     });
+    // }
     useEffect(
         () => {
             getQues().then((response) => {
@@ -76,6 +92,9 @@ export default function Profile() {
                 // console.log(answerAttempted[0].data().answerByID)
                 setAnswer(answerAttempted.length)
                 // console.log(currentUser.uid)
+            })
+            fetchUser().then((data) => {
+                setUserDetails(data)
             })
             getUsers().then((data) =>
                 setTotalUser(data))
@@ -103,12 +122,16 @@ export default function Profile() {
         if (nameRef.current.value) {
             promises.push(updateName(nameRef.current.value))
         }
+        if (walletRef.current.value) {
+            promises.push(walletUpdate(walletRef.current.value))
+        }
 
         Promise.all(promises)
             .then(() => {
                 history.push("/")
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 setError("Failed to update account")
             })
             .finally(() => {
@@ -166,6 +189,14 @@ export default function Profile() {
                                             defaultValue={currentUser.email}
                                         />
                                     </Form.Group>
+                                    <Form.Group id="wallet">
+                                        <Form.Label>Wallet Address</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            ref={walletRef}
+                                            placeholder="your wallet address"
+                                        />
+                                    </Form.Group>
                                     <Form.Group id="name">
                                         <Form.Label>Name</Form.Label>
                                         <Form.Control
@@ -191,8 +222,9 @@ export default function Profile() {
                             />
                         </Form.Group> */}
                                     {/* <a ref="src/components/moralis.html">Gift NFT</a> */}
-                                    {/* <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                    </Button> */}
+                                    <Button disabled={loading} className="w-100 mt-3" type="submit">
+                                        Update
+                                    </Button>
                                 </Form>
                             </Card.Body>
                         </Card>
@@ -221,34 +253,34 @@ export default function Profile() {
                         </Card>
                         <Card style={{ marginTop: "80px" }} className="container">
                             <Card.Body>
-                                {/* <h2 className="text-center mb-4">Total User Details</h2> */}
+                                <h2 className="text-center mb-4">Total User Details</h2>
 
-                                {/* {error && <Alert variant="danger">{error}</Alert>}
-                                <Form onSubmit={handleSubmit}>
-                                    <Form.Group id="email">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control
-                                            type="email"
-                                            disabled={true}
-                                            ref={emailRef}
-                                            required
-                                            defaultValue={currentUser.email}
-                                        />
-                                    </Form.Group>
-                                    <Form.Group id="name">
-                                        <Form.Label>Name</Form.Label>
-                                        <Form.Control
-                                            type="name"
-                                            ref={nameRef}
-                                            defaultValue={currentUser.displayName}
-                                        />
-                                    </Form.Group>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">User Name</th>
+                                            <th scope="col">Question Asked</th>
+                                            <th scope="col">Question Answered</th>
+                                            <th scope="col">Wallet Address</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{
+                                        userDetails.map((data, index) => {
+                                            return (<tr>
+                                                <th scope="row">{index + 1}</th>
+                                                <td>{data.data().userName}</td>
+                                                <td>{data.data().questionAttempted}</td>
+                                                <td>{data.data().answerAttempted}</td>
+                                                <td>{data.data().walletAddress}</td>
+                                            </tr>)
 
-                                    <Button disabled={loading} className="w-100 mt-3" type="submit">
-                                        Update
-                                    </Button>
-                                </Form> */}
-                                <TransferNFT />
+                                        })
+
+                                    }
+                                    </tbody>
+                                </table>
+                                {/* <TransferNFT /> */}
                             </Card.Body>
                         </Card>
                         {/* <div className="w-100 text-center mt-2">

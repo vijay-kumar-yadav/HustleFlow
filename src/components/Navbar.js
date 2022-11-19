@@ -2,6 +2,8 @@ import React, { useState } from "react";
 // import questionIMG from "../images/question.png"
 // import "./Navbar.css";
 // import userIMG from "../Images/user.png"
+import adminIMG from "../images/admin.png"
+
 import { Link, useHistory } from "react-router-dom";
 import { Alert, NavDropdown } from "react-bootstrap";
 import { useAuth } from "./context/AuthContext";
@@ -49,7 +51,7 @@ const Navbar = () => {
                                 <div className="d-flex">
 
                                     <div style={{ width: "fit-content", marginRight: "10px" }} className="bg-black rounded-circle  overflow-hidden">
-                                        <img src={currentUser.photoURL} style={{ width: "30px", height: "30px" }} />
+                                        <img className="bg-light" src={adminIMG} alt="user" style={{ width: "30px", height: "30px" }} />
                                     </div>
                                     <NavDropdown className="text-white" title={
                                         currentUser.displayName
