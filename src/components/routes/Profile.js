@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom"
 import { getDocs, collection, updateDoc, doc, increment } from "firebase/firestore"
 import adminIMG from "../../images/admin.png"
 import { db } from "../../firebase"
+import { TransferNFT } from "../TransferNft"
 
 export default function Profile() {
     // const [questionList, setQuestionList] = useState([]);
@@ -247,12 +248,7 @@ export default function Profile() {
                                         Update
                                     </Button>
                                 </Form> */}
-                                <Button >
-                                    <a href="./moralis.html">
-
-                                        Gift NFT
-                                    </a>
-                                </Button>
+                                <TransferNFT />
                             </Card.Body>
                         </Card>
                         {/* <div className="w-100 text-center mt-2">
